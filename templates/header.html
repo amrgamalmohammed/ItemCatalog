@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <header class="header header-margin">
+        <div class="container">
+            <!-- Logo image and info -->
+            <div class="row rowoverlay">
+                <div class="col-md-6 my-4">
+                    <div class="text-center text-md-left">
+                        <img src="/static/img/logo.png" class="img-fluid" alt="Online shop">
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex align-items-center">
+                    {% if 'username' not in session %}
+                    <div class="w-100 text-center text-md-right">
+                        <a href="/login">
+                            <button type="button" class="btn btn-danger">
+                                Login
+                            </button>
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="w-100 text-center text-md-right">
+                        <a href="/gdisconnect">
+                            <button type="button" class="btn btn-danger ">
+                                Logout
+                            </button>
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- Line separator -->
+            <div class="row">
+                <div class="col">
+                    <hr class="double-divider">
+                </div>
+            </div>
+        </div>
+    </header>
+</html>

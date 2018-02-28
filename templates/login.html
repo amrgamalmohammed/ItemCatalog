@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags -->
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Main CSS -->
+		<link rel="stylesheet" href="/static/css/main.css">
+
+		<!-- Bootstrap CSS-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+			  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+			  crossorigin="anonymous">
+
+		<title>Login</title>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+    </head>
+
+    <body>
+
+        <!-- Header -->
+		{% include 'header.html' %}
+
+        <main>
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col">
+                        <div class="my-4">
+                            Signin with Google account
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col">
+                        <div id="signInButton">
+                            <span class="g-signin"
+                                data-scope="openid email"
+                                data-clientid="285880668034-12jg7fmbh8lkh9jtj7f8k7l84d5n0hdt.apps.googleusercontent.com"
+                                data-redirecturi="postmessage"
+                                data-accesstype="offline"
+                                data-cookiepolicy="single_host_origin"
+                                data-callback="signInCallback"
+                                data-approvalprompt="force">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="result">
+                    <div class="col-4 mx-auto">
+                        <div class="my-4">Redirecting...</div>
+                        <div class="card">
+                            <!-- Card upper image -->
+                            <img class="card-img-top" id="result-img">
+                            <!-- Card title and description -->
+                            <div class="card-body">
+                                <h4 class="card-title" id="result-name"></h4>
+                                <p class="card-text">
+                                    Welcome to Online shop!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- footer -->
+		{% include 'footer.html' %}
+
+        <script>
+            function signInCallback(authResult) {
+                //if successful google login
+                if (authResult['code']) {
+                    $('#signInButton').attr('style', 'display: none');
+                    //send the one-time-use code to the server, if the server responds
+                    $.ajax({
+                        type: 'POST',
+                        url: '/gconnect?state={{STATE}}',
+                        processData: false,
+                        contentType: 'application/octet-stream; charset=utf-8',
+                        data: authResult['code'],
+                        success: function (result) {
+                            if (result) {
+                                console.log(JSON.parse(result))
+                                var elements = JSON.parse(result)
+                                $('#result-name').html(elements[0])
+                                $('#result-img').attr('src', elements[1])
+                                $('#result-img').attr('alt', elements[0])
+                                $('#result').attr('style', 'display: block')
+                                setTimeout(function () {
+                                    window.location.href = "/";
+                                }, 5000);
+                            }
+                            else if (authResult['error']) {
+                                console.log('There was and error: ' + authResult['error']);
+                            }
+                            else {
+                                $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+                            }
+                        }
+                    });
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Main CSS -->
+		<link rel="stylesheet" href="/static/css/main.css">
+
+		<!-- Bootstrap CSS-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+			  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+			  crossorigin="anonymous">
+
+		<title>Category</title>
+	</head>
+	<body>
+
+		<!-- Header -->
+		{% include 'header.html' %}
+
+		<!-- Body -->
+		<main>
+			<div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h1 class="my-4 text-center">{{ category.name }}</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Use cards to display items -->
+                    {% for item in items %}
+                        {% if category.id == item.category_id %}
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="card h-100">
+                                    <!-- Card upper image -->
+                                    <a href="{{ url_for('show_item', category_name = category.name, item_name = item.name) }}">
+                                        <img class="card-img-top" src="{{ item.picture }}" alt="{{ item.name }}">
+                                    </a>
+                                    <!-- Card title and description -->
+                                    <div class="card-body">
+                                        <h4 class="card-title">
+                                            <a href="">{{ item.name }}</a>
+                                        </h4>
+                                        <p class="card-text">
+                                            {{ item.description }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+			</div>
+		</main>
+
+		<!-- footer -->
+		{% include 'footer.html' %}
+	</body>
+</html>
