@@ -382,26 +382,6 @@ def delete_item(category_name, item_name):
                                item_name=item_name)
 
 
-# JSON API call to show all store information
-@app.route('/catalog/api/catalog')
-def catalog_api():
-    try:
-        categories = session.query(Category).order_by(asc(Category.id)).all()
-        serialized = []
-        # Serialize all category items
-        for category in categories:
-            result = {'category': category.serialize, 'items': []}
-            items = session.query(Item).filter_by(
-                category_id=category.id).all()
-            for item in items:
-                result['items'].append(item.serialize)
-            serialized.append(result)
-
-        return jsonify(result=serialized)
-    except NoResultFound:
-        return jsonify({'error': 'No result found'})
-
-
 # JSON API call to show all categories
 @app.route('/catalog/api/categories')
 def categories_api():
@@ -442,6 +422,31 @@ def item_api(category_name, item_name):
         return jsonify(item.serialize)
     except NoResultFound:
         return jsonify({'error': 'No result found'})
+
+
+# JSON API call to show all store information
+@app.route('/catalog/api/catalog')
+def catalog_api():
+    # Protected JSON API call
+    if 'username' in login_session:
+        try:
+            categories = session.query(Category)\
+                .order_by(asc(Category.id)).all()
+            serialized = []
+            # Serialize all category items
+            for category in categories:
+                result = {'category': category.serialize, 'items': []}
+                items = session.query(Item).filter_by(
+                    category_id=category.id).all()
+                for item in items:
+                    result['items'].append(item.serialize)
+                serialized.append(result)
+
+            return jsonify(result=serialized)
+        except NoResultFound:
+            return jsonify({'error': 'No result found'})
+    else:
+        return jsonify({'error': 'This a protected call please login first'})
 
 
 # JSON API call to show all items
