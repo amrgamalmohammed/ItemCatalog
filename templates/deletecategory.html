@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Main CSS -->
+		<link rel="stylesheet" href="/static/css/main.css">
+
+		<!-- Bootstrap CSS-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+			  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+			  crossorigin="anonymous">
+
+		<title>Delete Category</title>
+	</head>
+	<body>
+
+		<!-- Header -->
+		{% include 'header.html' %}
+
+		<!-- Body -->
+		<main>
+			<div class="container">
+                <!-- Display item -->
+                <div class="row">
+                    <div class="col-6 mx-auto">
+                        <form action="{{ url_for('delete_category', category_name=category_name) }}" method = "post">
+                            <div class="card text-center">
+                                <div class="card-header h2">
+                                    Delete Category
+                                </div>
+                                <div class="card-body">
+                                    <p>Are you sure you want to delete {{ category_name }} ?</p>
+                                </div>
+                                <div class="card-footer text-muted">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <a href="{{ url_for('show_category', category_name=category_name) }}" class="btn btn-danger">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+			</div>
+		</main>
+
+		<!-- footer -->
+		{% include 'footer.html' %}
+
+	</body>
+</html>

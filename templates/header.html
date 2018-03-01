@@ -6,7 +6,9 @@
             <div class="row rowoverlay">
                 <div class="col-md-6 my-4">
                     <div class="text-center text-md-left">
-                        <img src="/static/img/logo.png" class="img-fluid" alt="Online shop">
+                        <a href="{{ url_for('shop_categories') }}">
+                            <img src="/static/img/logo.png" class="img-fluid" alt="Online shop">
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
@@ -20,8 +22,8 @@
                     </div>
                     {% else %}
                     <div class="w-100 text-center text-md-right">
-                        <a href="/gdisconnect">
-                            <button type="button" class="btn btn-danger ">
+                        <a href="/logout">
+                            <button type="button" class="btn btn-danger">
                                 Logout
                             </button>
                         </a>
@@ -34,6 +36,20 @@
                 <div class="col">
                     <hr class="double-divider">
                 </div>
+            </div>
+            <!-- Display flash messages if any -->
+            <div class="row">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="col-12">
+                            <div class="card text-center">
+                                <div class="card-text">{{ message }}</div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
             </div>
         </div>
     </header>

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, make_response, flash
+from flask import Flask, render_template, request, make_response, flash, redirect, url_for
 from flask import session as login_session
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
@@ -19,18 +19,21 @@ session = DBSession()
 CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "Online shop"
 
-def check_user_id(email):
-    user = session.query(User).filter_by(email=email).first()
-    if user is not None:
-        return user.id
-    return None
-
-
 def create_user(login_session):
-    user = User(username=login_session['username'], email=login_session['email'],
-                picture=login_session['picture'])
-    session.add(user)
+    new_user = User(username=login_session['username'], email=login_session[
+                   'email'], picture=login_session['picture'])
+    session.add(new_user)
     session.commit()
+    user = session.query(User).filter_by(email=login_session['email']).one()
+    return user.id
+
+
+def get_user_ID(email):
+    try:
+        user = session.query(User).filter_by(email=email).one()
+        return user.id
+    except:
+        return None
 
 
 # Create anti-forgery state token
@@ -39,6 +42,10 @@ def show_login():
     state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange(32))
     login_session['state'] = state
     return render_template('login.html', STATE=state)
+
+@app.route('/logout/')
+def show_logout():
+    return render_template('logout.html')
 
 
 @app.route('/gconnect', methods=['POST'])
@@ -114,14 +121,13 @@ def gconnect():
     login_session['email'] = data['email']
 
     # Create the user if doesn't exist
-    user_id = check_user_id(login_session['email'])
-    if user_id is None:
-        create_user(login_session)
-        user_id = check_user_id(login_session['email'])
+    user_id = get_user_ID(login_session['email'])
+    if not user_id:
+        user_id = create_user(login_session)
     login_session['user_id'] = user_id
 
     output = [login_session['username'], login_session['picture']]
-    print "done!"
+    flash('Welcome '+login_session['username']+'!')
     return json.dumps(output)
 
 
@@ -148,6 +154,7 @@ def gdisconnect():
         del login_session['username']
         del login_session['email']
         del login_session['picture']
+        flash('Successfully logged out')
         response = make_response(json.dumps('Successfully disconnected.'), 200)
         response.headers['Content-Type'] = 'application/json'
         return response
@@ -167,19 +174,134 @@ def shop_categories():
 
 @app.route('/catalog/<path:category_name>/items/')
 def show_category(category_name):
-    category = session.query(Category).filter_by(name=category_name).first()
+    category = session.query(Category).filter_by(name=category_name).one()
     items = session.query(Item).filter_by(category_id=category.id)
     return render_template('category.html', items=items, category=category)
 
 
 @app.route('/catalog/<path:category_name>/<path:item_name>/')
 def show_item(category_name, item_name):
-    category = session.query(Category).filter_by(name=category_name).first()
-    item = session.query(Item).filter_by(category_id=category.id, name=item_name).first()
-    if 'username' not in login_session:
+    category = session.query(Category).filter_by(name=category_name).one()
+    item = session.query(Item).filter_by(category_id=category.id, name=item_name).one()
+    if 'username' not in login_session or login_session['user_id'] != item.user_id:
         return render_template('item.html', owner=False, item=item)
     else:
-        return render_template('item.html', owner=True, item=item)
+        return render_template('item.html', owner=True, category=category, item=item)
+
+
+@app.route('/catalog/add/', methods=['GET', 'POST'])
+def add_category():
+    if 'username' not in login_session:
+        return redirect('/login')
+    if request.method == 'POST':
+        category = Category(name=request.form['category-name'], user_id=login_session['user_id'])
+        session.add(category)
+        session.commit()
+        flash('New category %s successfully created' % category.name)
+        return redirect('/')
+    else:
+        return render_template('addcategory.html')
+
+
+@app.route('/catalog/<path:category_name>/add/', methods=['GET', 'POST'])
+def add_item(category_name):
+    if 'username' not in login_session:
+        return redirect('/login')
+    if request.method == 'POST':
+        category = session.query(Category).filter_by(name=category_name).one()
+        if category.user_id == login_session['user_id']:
+            item = Item(name=request.form['item-name'],
+                        picture=request.form['item-picture'],
+                        description=request.form['item-description'],
+                        category_id=category.id, user_id=login_session['user_id'])
+            session.add(item)
+            session.commit()
+            flash('New item %s successfully created' % item.name)
+        else:
+            flash('Sorry you are not the owner of this category!')
+        return redirect(url_for('show_category', category_name=category_name))
+    else:
+        return render_template('additem.html', category_name=category_name)
+
+
+@app.route('/catalog/<path:category_name>/edit/', methods=['GET', 'POST'])
+def edit_category(category_name):
+    if 'username' not in login_session:
+        return redirect('/login')
+    if request.method == 'POST':
+        category = session.query(Category).filter_by(name=category_name).one()
+        if category.user_id == login_session['user_id']:
+            name = request.form['category-name']
+            if name is not u'':
+                category.name = name
+            session.add(category)
+            session.commit()
+            flash('Edited category %s successfully' % category.name)
+        else:
+            flash('Sorry you are not the owner of this category!')
+        return redirect(url_for('show_category', category_name=category.name))
+    else:
+        return render_template('editcategory.html', category_name=category_name)
+
+
+@app.route('/catalog/<path:category_name>/<path:item_name>/edit/', methods=['GET', 'POST'])
+def edit_item(category_name, item_name):
+    if 'username' not in login_session:
+        return redirect('/login')
+    if request.method == 'POST':
+        item = session.query(Item).filter_by(name=item_name).one()
+        if item.user_id == login_session['user_id']:
+            name = request.form['item-name']
+            picture = request.form['item-picture']
+            description = request.form['item-description']
+            if name is not u'':
+                item.name = name
+            if picture is not u'':
+                item.picture = picture
+            if description is not u'':
+                item.description = description
+            session.add(item)
+            session.commit()
+            flash('Edited item %s successfully' % item.name)
+        else:
+            flash('Sorry you are not the owner of this item!')
+        return redirect(url_for('show_item', category_name=category_name, item_name=item.name))
+    else:
+        return render_template('edititem.html', category_name=category_name, item_name=item_name)
+
+
+@app.route('/catalog/<path:category_name>/delete/', methods=['GET', 'POST'])
+def delete_category(category_name):
+    if 'username' not in login_session:
+        return redirect('/login')
+    if request.method == 'POST':
+        category = session.query(Category).filter_by(name=category_name).one()
+        if category.user_id == login_session['user_id']:
+            session.delete(category)
+            session.commit()
+            flash('deleted category %s successfully' % category_name)
+        else:
+            flash('Sorry you are not the owner of this category!')
+        return redirect('/')
+    else:
+        return render_template('deletecategory.html', category_name=category_name)
+
+
+@app.route('/catalog/<path:category_name>/<path:item_name>/delete/', methods=['GET', 'POST'])
+def delete_item(category_name, item_name):
+    if 'username' not in login_session:
+        return redirect('/login')
+    if request.method == 'POST':
+        item = session.query(Item).filter_by(name=item_name).one()
+        if item.user_id == login_session['user_id']:
+            session.delete(item)
+            session.commit()
+            flash('deleted item %s successfully' % item_name)
+        else:
+            flash('Sorry you are not the owner of this item!')
+        return redirect(url_for('show_category', category_name=category_name))
+    else:
+        return render_template('deleteitem.html', category_name=category_name, item_name=item_name)
 
 
 if __name__ == '__main__':

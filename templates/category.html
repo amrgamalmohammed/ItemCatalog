@@ -41,7 +41,7 @@
                                     <!-- Card title and description -->
                                     <div class="card-body">
                                         <h4 class="card-title">
-                                            <a href="">{{ item.name }}</a>
+                                            <a href="{{ url_for('show_item', category_name = category.name, item_name = item.name) }}">{{ item.name }}</a>
                                         </h4>
                                         <p class="card-text">
                                             {{ item.description }}
