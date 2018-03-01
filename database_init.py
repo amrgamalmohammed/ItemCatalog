@@ -34,7 +34,8 @@ session.commit()
 
 # Load Category data
 for entry in categories:
-    category = Category(name=entry['name'], user_id=entry['user_id'])
+    category = Category(name=entry['name'], user_id=entry['user_id'],
+                        picture=entry['picture'])
     session.add(category)
 
 # Commit categories changes to database
@@ -43,7 +44,9 @@ session.commit()
 # Load Item data
 for entry in items:
     item = Item(name=entry['name'], picture=entry['picture'],
-                description=entry['description'], category_id=entry['category_id'],
+                description=entry['description'],
+                price=entry['price'],
+                category_id=entry['category_id'],
                 user_id=entry['user_id'])
     session.add(item)
 

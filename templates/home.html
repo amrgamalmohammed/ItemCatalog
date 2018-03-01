@@ -23,44 +23,42 @@
 		<!-- Body -->
 		<main>
 			<div class="container">
-                <!-- Display categories and items -->
-                {% for category in categories %}
-                    <!-- Start category grid section -->
-                    <div class="row d-flex align-items-center">
-                        <div class="col-lg-3">
-                            <h1 class="my-4">{{ category.name }}</h1>
-                        </div>
-						<div class="col">
-							<a role="button" aria-pressed="true" class="btn btn-outline-primary" href="{{ url_for('show_category', category_name=category.name) }}">
-								view category
-							</a>
-						</div>
-                    </div>
-                    <div class="row">
-                        <!-- Use cards to display items -->
-                        {% for item in items %}
-                            {% if category.id == item.category_id %}
-                                <div class="col-lg-4 col-sm-6">
-                                    <div class="card h-100">
-                                        <!-- Card upper image -->
-                                        <a href="{{ url_for('show_item', category_name = category.name, item_name = item.name) }}">
-                                            <img class="card-img-top" src="{{ item.picture }}" alt="{{ item.name }}">
-                                        </a>
-                                        <!-- Card title and description -->
-                                        <div class="card-body">
-                                            <h4 class="card-title">
-                                                <a href="{{ url_for('show_item', category_name = category.name, item_name = item.name) }}">{{ item.name }}</a>
-                                            </h4>
-                                            <p class="card-text">
-                                                {{ item.description }}
-                                            </p>
+                <div class="row d-flex align-items-center">
+                    {% for category in categories %}
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="my-4">{{ category.name }}</h4>
+                                    </div>
+                                    <div class="col d-flex align-items-center">
+                                        <div class="w-100 text-center text-md-right">
+                                            <a role="button" aria-pressed="true" class="btn btn-outline-primary" href="{{ url_for('show_category', category_name=category.name) }}">
+                                                view category
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                            {% endif %}
-                        {% endfor %}
+                            </div>
+                            <a href="{{ url_for('show_category', category_name=category.name) }}">
+                                <img class="card-img-top" src="{{ category.picture }}" alt="{{ category.name }}">
+                            </a>
+                        </div>
                     </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
+                <div class="row">
+                    <div class="col text-center my-4">
+                        {% if 'username' in session %}
+                        <a role="button" aria-pressed="true" class="btn btn-outline-primary" href="{{ url_for('add_category') }}">
+                            Add categories
+                        </a>
+                        {% else %}
+                        <p>Login to add more categories!</p>
+                        {% endif %}
+                    </div>
+                </div>
 			</div>
 		</main>
 

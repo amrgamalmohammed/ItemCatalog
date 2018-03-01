@@ -24,6 +24,16 @@
 		<main>
 			<div class="container">
                 <div class="row">
+                    <div class="col text-right">
+                        {% if owner %}
+                        <a href="{{ url_for('edit_category', category_name=category.name) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ url_for('delete_category', category_name=category.name) }}" class="btn btn-danger">Delete</a>
+                        {% else %}
+                        <p>You have to login and be the owner of the category in order to edit or delete it</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col">
                         <h1 class="my-4 text-center">{{ category.name }}</h1>
                     </div>
@@ -43,16 +53,26 @@
                                         <h4 class="card-title">
                                             <a href="{{ url_for('show_item', category_name = category.name, item_name = item.name) }}">{{ item.name }}</a>
                                         </h4>
-                                        <p class="card-text">
-                                            {{ item.description }}
-                                        </p>
+                                    </div>
+                                    <div class="card-footer">
+                                        {{ item.price }} $
                                     </div>
                                 </div>
                             </div>
                         {% endif %}
                     {% endfor %}
                 </div>
-
+                <div class="row">
+                    <div class="col text-center my-4">
+                        {% if owner %}
+                        <a role="button" aria-pressed="true" class="btn btn-outline-primary" href="{{ url_for('add_item', category_name=category.name) }}">
+                            Add items
+                        </a>
+                        {% else %}
+                        <p>You have to login and be the owner of the category in order to add items!</p>
+                        {% endif %}
+                    </div>
+                </div>
 			</div>
 		</main>
 

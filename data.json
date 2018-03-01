@@ -16,18 +16,22 @@
 			"categories_list":[
 				{
 					"name": "Electronics",
-					"user_id":1
-				},
-				{
-					"name": "Food",
-					"user_id":1
-				},
-				{
-					"name": "Beauty",
+					"picture": "https://i.imgur.com/e3T0LHr.jpg",
 					"user_id":2
 				},
 				{
+					"name": "Food",
+					"picture": "https://i.imgur.com/tqmLp0S.jpg",
+					"user_id":2
+				},
+				{
+					"name": "Beauty",
+					"picture": "https://i.imgur.com/8PpAlsy.jpg",
+					"user_id":1
+				},
+				{
 					"name": "Toys",
+					"picture": "https://i.imgur.com/l40AiGS.jpg",
 					"user_id":3
 				}
 			]
@@ -39,48 +43,95 @@
 					"name": "Canon Digital SLR",
 					"picture": "https://i.imgur.com/mNdBmIH.jpg",
 					"description": "This Grace Photo Camera Bundle Comes Complete With Manufacturer Supplied Accessories(U.S. Compatible) and a 1 Year Seller Provided Warranty, Package Includes: Canon EOS Rebel T6 - 18MP APS-C CMOS Sensor , DIGIC 4 Image Processor , 3.0' 920k-Dot LCD Monitor , Full HD 1080p Video Recording at 30 fps ,9-Point AF with Center Cross-Type Point , Extended ISO 12800, 3 fps Shooting , Built-In Wi-Fi with NFC, Scene Intelligent Auto Mode, Built-In Wi-Fi with NFC Basic+ and Creative Auto Modes Canon EF-S 18-55mm F/3.5-5.6 IS II Zoom Lens - EF-S Mount lens , 29-88mm (35mm Equivalent) , Aperture Range: f/3.5-38 , Aspherical Element , Optical Image Stabilization ,Constant Minimum Focus Distance: 9.8' , Circular Diaphragm 32GB High Speed Class 10 Memory Card + USB SD Card Reader + Camera Case + Digital Slave Flash + 58mm 3 Piece Filter Kit + 58mm Threaded Tulip Hood + Camera Wrist Grip + Lens Cap Keeper + 7 Piece Camera Maintenance Kit and a 50 inch DSLR Camera Tripod 58mm 0.43x Auxiliary Wideangle Lens - it conveniently mounts to the front of your fixed or zoom lens, and allows you to capture a wider field of view,58mm 2.2x Auxiliary Telephoto Lens - brings you twice as close to the action. Perfect for long-distance photo situations such as sporting events",
+					"price": 2799.00,
 					"category_id": 1,
-					"user_id": 1
+					"user_id": 2
 				},
 				{
 					"name": "Sony 4K Monitor",
 					"picture": "https://i.imgur.com/gds6Fw7.jpg",
 					"description": "Dimensions (W x H x D): TV without stand: 38 x 22 3/8 x 2 1/4 Inches; TV with stand: 42 x 26 x 6 Inches. Smart functionality gives you access to your favorite apps and content using Sony’s Android TV. Pairs 4K Ultra HD picture clarity with the contrast, color, and detail of High Dynamic Range (HDR) for the most lifelike picture. Edge-lit LED produces great picture quality with sleek slim design. 60Hz native refresh rate plus Motionflow XR gives you great motion for all types of content. Inputs: 4 – HDMI, 2 - USB2.0, 1 – USB3.0, 1 – Component/Composite Hybrid, 1 – Composite. Model year: 2017; Screen Size (inch, measured diagonally): 43 (42.5) Inch. Connectivity: Wi-Fi Certified 802.11a/b/g/n/ac; Smartphone; Bluetooth. Includes: AC power adapter; AC Power Cord; Batteries; IR Blaster; Operating Instructions; Quick Setup Guide; Table Top Stand & Voice Remote Control. In the box: Voice Remote Control (RMF-TX300U), Batteries (R03), AC Power Adaptor (ACDP-120E03, ACDP-160M01), AC Power Cord Spec (US 2pin, Inlet C7, Straight), IR Blaster (1-849-161-12), Operating Instructions, Quick Setup Guide / Supplement CUE (GA), Table Top Stand (Separate, assemble required)",
+					"price": 598.00,
 					"category_id": 1,
-					"user_id": 1
+					"user_id": 2
+				},
+				{
+					"name": "HTC Vive Virtual Reality",
+					"picture": "https://i.imgur.com/vYOmQyc.jpg",
+					"description": "FREE CONTENT WITH PURCHASE - Fallout 4 VR plus a two month free trial of Viveport Subscription included with your purchase. FULLY IMMERSIVE - True-to-life movements with realistic graphics, directional audio and HD haptic feedback. PRECISION MOVEMENT TRACKING - 360-degree controller and headset tracking covers your movements to the millimeter, floor-to ceiling. FLEXIBLE PLAY AREA - Room-Scale VR with just two base stations. Use VIVE seated, standing or in a space up to 15 feet x 15 feet. POWERED BY STEAM VR - Enjoy over 2500 games for SteamVR, plus everything you love about Steam, including new releases, automatic game updates and millions of your closest friends, in VR.",
+					"price": 527.12,
+					"category_id": 1,
+					"user_id": 2
+				},
+				{
+					"name": "DROGRACE WP200 Action Cam",
+					"picture": "https://i.imgur.com/m66RuY1.jpg",
+					"description": "Full HD 1080P Sports Action Camera Featuring professional 1080P/25fps videos and 12MP photos, capture every fantasy moment in you daily life. WP200 enables people to take pictures of disired one and record the exact moments with 2.0 Inch high definition LCD screen, also easy to preview and playback.Waterproof Action Camera Drograce waterproof case is designed to use in extremely environments and conditions, the level of protection reaches IP68. The strong waterproof housing allows you to dive up to 100ft(30m), all buttons can be operated underwater. Ideal for water sports such as in swimming, surfing, snorkeling, biking and diving etc.",
+					"price": 29.99,
+					"category_id": 1,
+					"user_id": 2
+				},
+				{
+					"name": "Garmin vívofit 2",
+					"picture": "https://i.imgur.com/a4tpi5q.jpg",
+					"description": "Move bar w/audible alert - Reminds you to stay active throughout the day by displaying a red move bar and sounding an alert after one hour of inactivity. Additional segments lightup for every 15 minutes of inactivity. Walk for a couple of minutes to reset. BACKLIT DISPLAY - The display is always on so you won’t miss a beat. Turn on the backlight to see your stats, even in the dark. ACTIVITY TIMER - Record activities with or without a heart rate monitor. Water rating:5 ATM",
+					"price": 52.99,
+					"category_id": 1,
+					"user_id": 2
 				},
 				{
 					"name": "MARS Chocolate Minis Size",
 					"picture": "https://i.imgur.com/0vudQdm.jpg",
 					"description": "Contains one (1) 67.2-ounce, 240-piece stand-up bag with an assortment of MARS Chocolate Miniature Chocolate Bars This variety mix includes SNICKERS, TWIX, 3 MUSKETEERS and MILKY WAY Chocolate Candy These bite-size chocolate candy pieces are great for holiday parties, the office, Easter or birthday parties Fill your candy dish with everyone's favorite MARS Chocolate MARS Chocolate Candy is the perfect chocolate treat for everyday celebrations or parties",
+					"price": 21.99,
 					"category_id": 2,
-					"user_id": 1
+					"user_id": 2
 				},
 				{
 					"name": "Mentos Pure Fresh Sugar-Free",
 					"picture": "https://i.imgur.com/qBclWDG.jpg",
 					"description": "Mentos Gum gives you a blast of fresh flavor that lasts chew after chew Comes in an attractive curvy bottle with 50 pieces, the perfect size for your desk, car or kitchen Fresh Mint is a cool burst of mint flavor for long-lasting freshness And always Sugar-free The number #1 ingredient is Xylitol which is a natural sugar substitute that may reduce the risk of tooth decay and gives you a blast of fresh flavor chew after chew.",
+					"price": 16.45,
 					"category_id": 2,
-					"user_id": 1
+					"user_id": 2
+				},
+				{
+					"name": "Ferrero Rocher Fine Hazelnut",
+					"picture": "https://i.imgur.com/T0uhdKn.jpg",
+					"description": "48-Count Gift Box A tempting combination of smooth chocolaty cream surroiunding a whole hazelnut within a delciate, crisp wafer all enveloped in milk chocolate and finely chopped hazelnuts Perfect for holiday gifting, sharing, or indulging on your own Make loved ones feel special every day with Ferrero Rocher Confections Peanuts Free, Certified Kosher (OU-Dairy)",
+					"price": 39.99,
+					"category_id": 2,
+					"user_id": 2
+				},
+				{
+					"name": "Ferrero Nutella Hazelnut",
+					"picture": "https://i.imgur.com/vdTqyJo.jpg",
+					"description": "13 Ounce Jar The original hazelnut chocolate spread made from a combination of roasted hazelnuts, skim milk, and a hint of cocoa Loved by both kids and adults No artifical Colors or Preservatives Gluten Free, Peanut Free, and Certified Kosher",
+					"price": 3.48,
+					"category_id": 2,
+					"user_id": 2
 				},
 				{
 					"name": "Remington Hair Dryer",
 					"picture": "https://i.imgur.com/gONeBta.jpg",
 					"description": "Micro-Conditioners - Get up to 3x more protection compared to standard Remington dryers. The grill is infused with micro-conditioners that release into the dryer’s airflow and get transferred into your hair to help prevent damage and maximize shine Advanced Technology - We’ve packed a bunch of useful technology into this hair dryer! Negative ions reduce frizz, the ceramic-coated grill produces infrared heat for fast drying, and tourmaline technology protects the hair cuticle from over-heating 1875-Watt Motor - The powerful motor produces strong, consistent airflow to dry even thick, wavy hair in no time 3 Heat Settings + 2 Speed Settings - Find the right temperature and airflow for your hair with 3 heat and 2 speed settings. Start with high heat to remove excess moisture, then switch to low heat and speed when you’re ready to style and perfect your look. Voltage: 120 Volts. Attachments - The narrow air concentrator is ideal for precision styling on straight, smooth hair. To gain volume and curls, clip on the air diffuser and move it quickly around your head Cool Shot - Lock in your style with the cool shot button that provides a blast of cold air to hold your look all day long.",
+					"price": 16.86,
 					"category_id": 3,
-					"user_id": 2
+					"user_id": 1
 				},
 				{
 					"name": "Coty Airspun Loose Face Powder",
 					"picture": "https://i.imgur.com/Z3IlFXJ.jpg",
 					"description": "HIDE LINES & WRINKLES: Coty Airspun Face Powder in a Translucent Tone is a loose face and setting powder that helps to minimizes the appearance of fine lines, wrinkles, acne, bumps, scars & other blemishes, giving your facial skin a smoother, softer look. FOUNDATION OR SETTING POWDER: Coty Airspun Face Powder can be used to help smooth & soften the appearance of your skin as a foundation coverage, or use the loose powder on top of your makeup as a setting powder so you can get that flawless, smooth look LIGHTWEIGHT LONG LASTING COVERAGE: Airspun Loose Face Powder is long lasting & helps give full coverage that feels lightweight enough to wear all day. This face powder can be used as foundation or setting powder & helps your face look smooth & flawless FLAWLESS FINISH: Get the flawless finish you want with the help of Airspun Loose Face Powder. Use to set contouring and highlights, or to help conceal and reduce the look of rough skin, fine lines, wrinkles, skin blemishes & help correct uneven skin tones UNIQUE AIRSPUN FACE POWDER: Compare to loose face powder, powder foundation & setting powder from other brands such as Maybelline, NYC, L'Oréal, Milani, Sacha, Revlon, Covergirl, elf., Mehron, bareMinerals, Neutrogena, Rimmel, Clinique & Dermablend",
+					"price": 6.99,
 					"category_id": 3,
-					"user_id": 2
+					"user_id": 1
 				},
 				{
 					"name": "Mega Bloks 80-Piece Big Building Bag",
 					"picture": "https://i.imgur.com/Yckvog0.jpg",
 					"description": "80 building blocks for hours of play Encourages hands-on exploration as children imagine and create Compatible with all Mega Bloks sets for endless building possibilities Portable, PVC-free bag zips to store all pieces Great gift for Mega Bloks fans! Packaging may vary",
+					"price": 14.89,
 					"category_id": 4,
 					"user_id": 3
 				},
@@ -88,6 +139,7 @@
 					"name": "Hasbro Connect 4 Game",
 					"picture": "https://i.imgur.com/ul62r1V.jpg",
 					"description": "Classic Connect 4 game is disc-dropping fun Choose yellow or red discs. For 2 players When you get 4 discs in a row you win Includes grid, 2 legs, slider bar, 21 red discs, 21 yellow discs and instructions",
+					"price": 8.79,
 					"category_id": 4,
 					"user_id": 3
 				}
