@@ -28,6 +28,7 @@ class Category(Base):
     picture = Column(String(250))
     user_id = Column(Integer, ForeignKey("user.id"))
     user = relationship(User)
+    item = relationship('Item', cascade='all, delete-orphan')
 
     # Add a decorator property to serialize data from database
     @property

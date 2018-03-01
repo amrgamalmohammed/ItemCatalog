@@ -1,5 +1,10 @@
-from flask import Flask, render_template, request, \
-    make_response, flash, redirect, url_for, jsonify
+from flask import (Flask,
+                   render_template,
+                   request,
+                   make_response,
+                   flash, redirect,
+                   url_for,
+                   jsonify)
 from flask import session as login_session
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
